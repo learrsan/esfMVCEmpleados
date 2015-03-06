@@ -1,0 +1,34 @@
+﻿@using System.Activities.Statements
+@model IEnumerable<Empleados.Models.Centros>
+
+@{
+    ViewBag.Title = "Index";
+    bool par = false;
+
+}
+
+<h2>Listado de centros</h2>
+
+@foreach (var item in Model)
+{
+
+    <div style="@(par ? "background:silver;" : "background:gray;"); float: left; width: 100%;">
+        <h3>@item.nombre</h3><br />
+       
+
+        
+
+        <div style="float: left;">
+            <h3>Empleados</h3>
+            <ul>
+                @foreach (var empleado in item.Empleados)
+                {
+                    <li>@empleado.nombre @empleado.apellidos</li>
+                }
+            </ul>
+
+        </div>
+    </div>
+
+                par = !par;
+}

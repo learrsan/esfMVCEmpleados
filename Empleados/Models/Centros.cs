@@ -12,21 +12,17 @@ namespace Empleados.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empleados
+    public partial class Centros
     {
-        public Empleados()
+        public Centros()
         {
-            this.Centros = new HashSet<Centros>();
+            this.Empleados = new HashSet<Empleados>();
         }
     
-        public string dni { get; set; }
+        public int id { get; set; }
         public string nombre { get; set; }
-        public string apellidos { get; set; }
-        public int idcargo { get; set; }
-        public decimal salario { get; set; }
-        public System.DateTime fechaAlta { get; set; }
+        public string direccion { get; set; }
     
-        public virtual Cargos Cargos { get; set; }
-        public virtual ICollection<Centros> Centros { get; set; }
+        public virtual ICollection<Empleados> Empleados { get; set; }
     }
 }

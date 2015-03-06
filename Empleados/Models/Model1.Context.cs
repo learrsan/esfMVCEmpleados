@@ -26,6 +26,7 @@ namespace Empleados.Models
         }
     
         public virtual DbSet<Cargos> Cargos { get; set; }
+        public virtual DbSet<Centros> Centros { get; set; }
         public virtual DbSet<Empleados> Empleados { get; set; }
     }
 }
