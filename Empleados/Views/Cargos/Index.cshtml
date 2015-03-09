@@ -1,0 +1,43 @@
+﻿@using System.Activities.Statements
+@using Empleados.Models
+@model IEnumerable<Cargos>
+
+@{
+    ViewBag.Title = "Index";
+    bool par = false;
+
+}
+
+<h2>Listado de cargos</h2>
+
+@Html.ActionLink("Nuevo Cargo", "Alta")
+
+@foreach (var item in Model)
+{
+
+    <div style="@(par ? "background:silver;" : "background:gray;"); float: left; width: 100%;">
+        <h3>@item.nombre</h3><br />
+
+
+
+        <div style="float: left">
+            @Html.ActionLink("Borrar cargo", "Borrar", new { id = item.id })
+            @Html.ActionLink("Modificar cargo", "Modificar", new { id = item.id })
+        </div>
+
+
+        <div style="float: left;">
+            <h3>Empleados</h3>
+            <ul>
+                @foreach (var emple in item.Empleados)
+                {
+                    <li>@emple.nombre @emple.apellidos</li>
+                }
+            </ul>
+        </div>
+
+        
+    </div>
+
+                par = !par;
+}

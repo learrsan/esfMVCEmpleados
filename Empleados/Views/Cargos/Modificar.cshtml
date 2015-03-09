@@ -1,0 +1,28 @@
+﻿@model Empleados.Models.Cargos
+
+@{
+    ViewBag.Title = "Modificar";
+}
+
+<h2>Modificar</h2>
+
+@Html.ValidationSummary(false)
+@*Te saca los errores cuando está mal el formulario. Tambien se puede usar @Html.ValidationMessageFor() debajo de cada uno*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    //Sirve para evitar que se falseen datos sin pasar por el formulario
+
+    @Html.HiddenFor(o => o.id)
+    //Campo oculto que el usuario no ve y lo que hace es asegurarme de que se envia el id
+
+
+    @Html.LabelFor(o => o.nombre)
+    @Html.EditorFor(o => o.nombre)
+    @*@Html.ValidationMessageFor(o => o.nombre)*@
+    <br />
+    
+    <input type="submit" value="Enviar datos" />
+}
+
