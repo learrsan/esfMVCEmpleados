@@ -10,9 +10,9 @@ namespace Empleados.Controllers
 {
     public class HomeController : Controller
     {
-
-
-
+        private EmpleadosEntities db = new EmpleadosEntities();
+         
+        
 
 
         // GET: Home
@@ -26,23 +26,44 @@ namespace Empleados.Controllers
 
         }
 
+        
+        
         public ActionResult Alta()
         {
+            ViewBag.idcargos = new SelectList(db.Cargos, "id", "nombre");
+            ViewBag.idcentros = new SelectList(db.Centros, "id", "nombre");
+
             return View(new Models.Empleados());
         }
+        
 
+        //public ActionResult Alta(Models.Empleados model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        using (var db = new EmpleadosEntities())
+        //        {
+        //            db.Empleados.Add(model);
+        //            db.SaveChanges();
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    return View(model);
+        //}
         [HttpPost]
-
-        public ActionResult Alta(Models.Empleados model)
+        public ActionResult Alta(Empleados.Models.Empleados model)
         {
             if (ModelState.IsValid)
             {
-                using (var db = new EmpleadosEntities())
+                db.Empleados.Add(model);
+                foreach (var idcentros in model.Idcentro)
                 {
-                    db.Empleados.Add(model);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    var c = db.Centros.Find(idcentros);
+                    model.Centros.Add(c);
                 }
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
             return View(model);
         }
